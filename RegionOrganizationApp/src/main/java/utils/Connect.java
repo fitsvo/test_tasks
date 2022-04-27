@@ -9,7 +9,8 @@ public class Connect {
         Response response;
         try(AsyncHttpClient http = new DefaultAsyncHttpClient()){
             response = http.prepareGet(url).execute().get();
-            return response.getResponseBody();
+            if (!response.getResponseBody().contains("Error")) return response.getResponseBody();
+            else throw new Exception();
         } catch (Exception e) {
             System.out.println("Ошибка подключения.");
             return "";
